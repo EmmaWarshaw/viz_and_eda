@@ -253,6 +253,9 @@ ggplot(weather_df) + geom_point(aes(x = tmax, y = tmin, color = "blue"))
 
 ![](visualization_1_files/figure-gfm/unnamed-chunk-14-2.png)<!-- -->
 
+Make a histogram: not defining anything on the y-axis because it’s just
+going to scale as necessary
+
 ``` r
 ggplot(weather_df, aes(x = tmax)) + 
   geom_histogram()
@@ -273,6 +276,8 @@ ggplot(weather_df, aes(x = tmax, fill = name)) +
 
 ![](visualization_1_files/figure-gfm/unnamed-chunk-16-1.png)<!-- -->
 
+More options: density plot that gives you a kind smoothed-over histogram
+
 ``` r
 ggplot(weather_df, aes(x = tmax, fill = name)) + 
   geom_density(alpha = .4, adjust = .5, color = "blue")
@@ -282,6 +287,8 @@ ggplot(weather_df, aes(x = tmax, fill = name)) +
 
 ![](visualization_1_files/figure-gfm/unnamed-chunk-17-1.png)<!-- -->
 
+Box plots: Have to define the values for both the x and y axis.
+
 ``` r
 ggplot(weather_df, aes(x = name, y = tmax)) + geom_boxplot()
 ```
@@ -289,6 +296,10 @@ ggplot(weather_df, aes(x = name, y = tmax)) + geom_boxplot()
     ## Warning: Removed 3 rows containing non-finite values (stat_boxplot).
 
 ![](visualization_1_files/figure-gfm/unnamed-chunk-18-1.png)<!-- -->
+
+Violin Plot: Tells you the same kind of stuff that a box plot gives you,
+but adds in the distribution instead of the IQR like we see in a
+boxplot.
 
 ``` r
 ggplot(weather_df, aes(x = name, y = tmax)) + 
@@ -304,6 +315,10 @@ ggplot(weather_df, aes(x = name, y = tmax)) +
 
 ![](visualization_1_files/figure-gfm/unnamed-chunk-19-1.png)<!-- -->
 
+Ridge Plot: Creates each density but stacks them up next to each other
+instead of the weird overlay that comes out of a violin plot. This is
+much nicer if you need to compare distributions for a ton of categories.
+
 ``` r
 ggplot(weather_df, aes(x = tmax, y = name)) + 
   geom_density_ridges(scale = .85)
@@ -314,6 +329,13 @@ ggplot(weather_df, aes(x = tmax, y = name)) +
     ## Warning: Removed 3 rows containing non-finite values (stat_density_ridges).
 
 ![](visualization_1_files/figure-gfm/unnamed-chunk-20-1.png)<!-- -->
+
+\#Saving and imbedding plots
+
+First make a plot. Then save it with `ggplot`, giving it a name in
+parentheses followed by the name of the plot you just made, followed by
+width and height values for the output. You can also add in a file=“”
+command with a directory in there to tell it where to save.
 
 ``` r
 weather_plot = ggplot(weather_df, aes(x = tmin, y = tmax)) + 
